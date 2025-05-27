@@ -1,0 +1,4 @@
+debug
+.env
+__pycache__
+venv
