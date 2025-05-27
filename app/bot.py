@@ -17,7 +17,7 @@ async def send_message(message):
     if channel:
         await channel.send(message)
     else:
-        print(f"Channel with ID {CHANNEL_ID} not found.")
+        print(f"Channel not found.")
 
     await client.close()
 

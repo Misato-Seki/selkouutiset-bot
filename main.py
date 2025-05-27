@@ -20,7 +20,7 @@ async def main():
         for idx, article in enumerate(articles, 1):
             translation = translator(article)
             message += f"{translation}\n---\n"
-            print(f"記事{idx}\n{translation}\n\n")
+            print(f"記事{idx}\n{article}\n\n")
     else:
         print("No articles found.")
 
