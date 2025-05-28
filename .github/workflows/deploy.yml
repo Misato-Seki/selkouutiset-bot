@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * *' # 毎朝6時(JST)に実行（GitHub ActionsはUTCなので-9時間）
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
