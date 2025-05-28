@@ -1,6 +1,7 @@
 import discord
 import os
 from dotenv import load_dotenv
+import datetime
 
 load_dotenv()
 
@@ -10,15 +11,14 @@ CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID"))
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 
-async def send_message(message):
+yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+article_url = "https://yle.fi/selkouutiset"
+
+async def send_message():
     await client.wait_until_ready()
     
     channel = client.get_channel(CHANNEL_ID)
-    if channel:
-        await channel.send(message)
-    else:
-        print(f"Channel not found.")
-
+    await channel.send(f"Translated Selkouutiset for {yesterday.strftime('%m/%d')}: https://misato-seki.github.io/selkouutiset-bot/{yesterday.strftime('%Y-%m-%d')}.html")
     await client.close()
 
 if __name__ == "__main__":

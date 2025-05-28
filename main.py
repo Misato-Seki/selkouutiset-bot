@@ -1,31 +1,38 @@
 from app.fetch_articles import fetch_articles
 from app.translator import translator
 from app.bot import send_message, client, TOKEN
+from app.html_generator import generate_html, save_html, cleanup_old_html
 import asyncio
-from datetime import datetime
 
 async def main():
     # URL of the article to fetch
     article_url = "https://yle.fi/selkouutiset"
     
     # Fetch the articles from the URL
-    articles = fetch_articles(article_url)
+    articles = fetch_articles(article_url)    
 
-    today = datetime.now().strftime("%m月%d日")
-
-    message = f"{today}のニュース\n\n{article_url}\n\n"
+    translated_articles = []
     
-    # Translate each article and send bot messages
+    # Translate each article
     if articles:
-        for idx, article in enumerate(articles, 1):
-            translation = translator(article)
-            message += f"{translation}\n---\n"
-            print(f"記事{idx}\n{article}\n\n")
+        for article in articles:
+            # Translate the article paragraph
+            translated_paragraph = translator(article['paragraph'])
+            translated_articles.append({
+                'heading': article['heading'],
+                'paragraph': translated_paragraph
+            })
     else:
         print("No articles found.")
 
+    # Generate the HTML content from the translated articles
+    html = generate_html(translated_articles)
+    save_html(html)
+    # Cleanup old HTML files
+    cleanup_old_html()
+
     # Send the final message to the Discord channel
-    await send_message(message)
+    await send_message()
         
 if __name__ == "__main__":
     async def run_bot():
