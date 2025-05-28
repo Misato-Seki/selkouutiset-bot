@@ -29,7 +29,7 @@ def translator(sentence):
         ]
     )
     
-    return response.choices[0].message.content.strip()
+    return response.choices[0].message.content
 
 if __name__ == "__main__":
     # Example usage

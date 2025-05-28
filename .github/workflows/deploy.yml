@@ -2,7 +2,7 @@ name: Run main.py every morning (Docker)
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 毎朝6時(JST)に実行（GitHub ActionsはUTCなので-9時間）
+    - cron: '0 0 * * *' # Runs at 0:00 UTC every day
   workflow_dispatch:
 
 permissions:
