@@ -32,7 +32,7 @@ def generate_html(articles):
     for article in articles:
         html += f'''
         <h2>{article['heading']}</h2>
-        <p>{article['paragraph']}</p>
+        <p>{article['paragraph'].replace('\n', '<br>')}</p>
         '''
     html += '</body></html>'
     return html
