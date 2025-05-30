@@ -18,7 +18,7 @@ class TestMain(unittest.IsolatedAsyncioTestCase):
     ):
         # Arrange
         mock_fetch_articles.return_value = [
-            {'heading': 'Test Heading', 'paragraph': 'Test Paragraph'}
+            {'heading': 'Test Heading', 'paragraph': 'Test Paragraph.\nThis is a test.\nAnother line.'},
         ]
         mock_translator.side_effect = lambda text: f"dummy:{text}"
 

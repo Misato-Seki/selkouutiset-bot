@@ -30,9 +30,10 @@ def generate_html(articles):
       <a href="https://yle.fi/selkouutiset">https://yle.fi/selkouutiset</a>
     '''
     for article in articles:
+        paragraph_html = article['paragraph'].replace('\n', '<br>')
         html += f'''
         <h2>{article['heading']}</h2>
-        <p>{article['paragraph'].replace('\n', '<br>')}</p>
+        <p>{paragraph_html}</p>
         '''
     html += '</body></html>'
     return html
